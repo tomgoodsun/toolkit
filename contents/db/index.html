@@ -1,0 +1,48 @@
+<?php require ($root_dir . '/assets/include/head.inc'); ?>
+
+<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="database">
+    <label class="mdl-textfield__label" for="database">Database...</label>
+  </div>
+  <br />
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="username">
+    <label class="mdl-textfield__label" for="username">Username...</label>
+  </div>
+  <br />
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="password">
+    <label class="mdl-textfield__label" for="password">Password...</label>
+  </div>
+  <br />
+  <div class="mdl-textfield mdl-js-textfield">
+    <label for="charset">CHARSET</label>
+    <select id="charset" name="charset" class="mdl-textfield__input"></select>
+  </div>
+  <br />
+  <div class="mdl-textfield mdl-js-textfield">
+    <legend>GRANT HOST INFORMATION</legend>
+    <div id="preset-hosts"></div>
+    <label for="otherhosts" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">Other Hosts (delimiter is "\n")</label><br />
+    <textarea id="otherhosts" name="otherhosts" class="mdl-textfield__input"></textarea>
+  </div>
+  <br />
+
+  <button class="mdl-button mdl-js-button mdl-button--raised generate" data-dialog-id="full-width-dialog" data-dialog-title="Generated result">Generate</button>
+
+</div>
+<div id="privileges" class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet">
+  6 (8 tablet)
+  <br />
+  <input type="button" class="mdl-button mdl-js-button mdl-button--raised privilege-handler" data-command="recommended" value="Reset" />
+  <input type="button" class="mdl-button mdl-js-button mdl-button--raised privilege-handler" data-command="check-all" value="Check all" />
+  <input type="button" class="mdl-button mdl-js-button mdl-button--raised privilege-handler" data-command="uncheck-all" value="Uncheck all" />
+</div>
+
+<script src="<?php echo $content_uri; ?>/assets/default.js"></script>
+<link rel="stylesheet" href="<?php echo $content_uri; ?>/assets/default.css" />
+
+<!-- <script src="assets/js/db.js"></script> -->
+<?php require ($root_dir . '/assets/include/foot.inc'); ?>
