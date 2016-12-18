@@ -1,36 +1,40 @@
 <?php require ($root_dir . '/assets/include/head.inc'); ?>
 
 <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+  <label class="mdl-checkbox mdl-js-checkbox" for="opt-signs">
+    <input type="checkbox" id="opt-signs" class="mdl-checkbox__input" checked>
+    <span class="mdl-checkbox__label">Use signs</span>
+  </label>
+
+  <label class="mdl-checkbox mdl-js-checkbox" for="opt-upper-alphabets">
+    <input type="checkbox" id="opt-upper-alpahbets" class="mdl-checkbox__input" checked>
+    <span class="mdl-checkbox__label">Use upper alphabets</span>
+  </label>
+
+  <label class="mdl-checkbox mdl-js-checkbox" for="opt-lower-alphabets">
+    <input type="checkbox" id="opt-lower-alpahbets" class="mdl-checkbox__input" checked>
+    <span class="mdl-checkbox__label">Use lower alphabets</span>
+  </label>
+
+  <label class="mdl-checkbox mdl-js-checkbox" for="opt-numbers">
+    <input type="checkbox" id="opt-numbers" class="mdl-checkbox__input" checked>
+    <span class="mdl-checkbox__label">Use numbers</span>
+  </label>
+
+  <label class="mdl-checkbox mdl-js-checkbox" for="opt-whitespace">
+    <input type="checkbox" id="opt-whitespace" class="mdl-checkbox__input">
+    <span class="mdl-checkbox__label">Use spaces</span>
+  </label>
 
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="text" id="database">
-    <label class="mdl-textfield__label" for="database">Database...</label>
+    <input class="mdl-textfield__input" type="number" id="opt-min-chars" min="0">
+    <label class="mdl-textfield__label" for="opt-min-chars">Min length of password</label>
   </div>
-  <br />
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="text" id="username">
-    <label class="mdl-textfield__label" for="username">Username...</label>
-  </div>
-  <br />
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="text" id="password">
-    <label class="mdl-textfield__label" for="password">Password...</label>
-  </div>
-  <br />
-  <div class="mdl-textfield mdl-js-textfield">
-    <label for="charset">CHARSET</label>
-    <select id="charset" name="charset" class="mdl-textfield__input"></select>
-  </div>
-  <br />
-  <div class="mdl-textfield mdl-js-textfield">
-    <legend>GRANT HOST INFORMATION</legend>
-    <div id="preset-hosts"></div>
-    <label for="otherhosts" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">Other Hosts (delimiter is "\n")</label><br />
-    <textarea id="otherhosts" name="otherhosts" class="mdl-textfield__input"></textarea>
-  </div>
-  <br />
 
-  <button class="mdl-button mdl-js-button mdl-button--raised generate" data-dialog-id="full-width-dialog" data-dialog-title="Generated result">Generate</button>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="number" id="opt-max-chars" min="1">
+    <label class="mdl-textfield__label" for="opt-max-chars">Max length of password</label>
+  </div>
 
 </div>
 <div id="privileges" class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet">
