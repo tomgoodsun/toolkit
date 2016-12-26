@@ -1,3 +1,4 @@
+/*
 body.example {
   background: #eee;
   color: #666;
@@ -31,5 +32,12 @@ body.example {
   max-height: 20em;
   min-height: 10em;
   overflow: scroll;
+}
+*/
+
+.opt-min-chars,
+.opt-max-chars,
+.opt-sampling-num {
+  width: 120px !important;
 }
 
