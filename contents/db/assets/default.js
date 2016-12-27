@@ -518,7 +518,7 @@
         priv = this.privs.join(', ');
       if (this.database.length > 0 && this.username.length > 0 && this.hosts.length > 0) {
         for (var i = 0, len = this.hosts.length; i < len; i++) {
-          result.push(sprintf("GRANT %s ON '%s'.* TO '%s'@'%s';", priv, this.database, this.username, this.hosts[i]));
+          result.push(sprintf("GRANT %s ON `%s`.* TO '%s'@'%s';", priv, this.database, this.username, this.hosts[i]));
         }
       }
       return result;
