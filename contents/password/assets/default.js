@@ -1,12 +1,12 @@
-(function (window) {
+(function (window, document) {
   'use strict';
 
-  const LETTERSETS = {
+  const LETTER_TYPES = {
     'signs':'`~!@#$%^&*()_+-=[]\\;\',./{}|:"<>?',
     'uppercase':'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     'lowercase':'abcdefghijklmnopqrstuvwxyz',
     'numbers':'0123456789',
-    'space':''
+    'space':' '
   };
 
   /**
@@ -14,9 +14,9 @@
    * Class declaration
    */
   var PasswordGenerator = function () {
-    this.samplingNum = document.getElementById('opt-sampling-num').value;
-    this.maxLength = document.getElementById('opt-max-chars').value;
-    this.minLength = document.getElementById('opt-min-chars').value;
+    this.samplingNum = parseInt(document.getElementById('opt-sampling-num').value, 10);
+    this.maxLength = parseInt(document.getElementById('opt-max-chars').value, 10);
+    this.minLength = parseInt(document.getElementById('opt-min-chars').value, 10);
     this.noDuplicateChars = document.getElementById('opt-no-duplicate').checked;
     this.options = this.getOptions();
     this.availableChars = this.getAvailableChars();
@@ -55,10 +55,22 @@
       var result = '';
       for (var i in this.options) {
         if (this.options[i]) {
-          result += LETTERSETS[i];
+          result += LETTER_TYPES[i];
         }
       }
       return result;
+    },
+
+    /**
+     * Calculate length of generating password
+     *
+     * @return {int}
+     */
+    calcPasswordLength: function () {
+      if (this.minLength == this.maxLength) {
+        return this.minLength;
+      }
+      return Toolkit.Math.getRandomInt(this.minLength, this.maxLength);
     },
 
     /**
@@ -67,12 +79,11 @@
      * @return {array}
      */
     generate: function () {
-      var result = [];
-      var amount = this.samplingNum;
+      var result = [],
+        amount = this.samplingNum;
       amount = amount == 0 || amount == '' ? 1 : parseInt(amount, 10);
       if (isNaN(amount)) {
-        alert('Amount must be a number.');
-        return;
+        throw new Error('Amount must be a number.');
       }
       if (amount == 1) {
         result.push(this.generatePassword());
@@ -93,20 +104,18 @@
      * @return {string}
      */
     generatePassword: function() {
-      //var passwordLength = this.calcLength();
-      var result = '';
-      var charLength = this.availableChars.length;
-      //var dupchk = this.byId('settingNoDuplicate').checked;
-      //if (dupchk && passwordLength > charLength) {
-      //  alert('Too large number is specified for password length.');
-      //  return null;
-      //}
-      for ( var i = 0; i < this.maxLength; i++) {
-        var tempChar = this.availableChars.charAt(parseInt(Math.random() * charLength));
-        if (this.noDuplicateChars && result.indexOf(tempChar) > -1) {
+      var result = '',
+        len = this.calcPasswordLength(),
+        charLength = this.availableChars.length;
+      if (this.noDuplicateChars && len > charLength) {
+        throw new Error(sprintf('Specified length for password is too short (min: %s / max: %s).', this.minLength, this.maxLength));
+      }
+      for (var i = 0; i < len; i++) {
+        var tmp = this.availableChars.charAt(parseInt(Math.random() * charLength));
+        if (this.noDuplicateChars && result.indexOf(tmp) > -1) {
           i--;
         } else {
-          result += tempChar;
+          result += tmp;
         }
       }
       return result;
@@ -129,12 +138,28 @@
     document.querySelectorAll('.generate').forEach(function (elem) {
       elem.addEventListener('click', function () {
         var gen = new PasswordGenerator(),
-          passwords = gen.generate();
-        console.log(passwords);
-        //var dialog = document.querySelector('dialog#' + this.getAttribute('data-dialog-id'));
-        //dialog.querySelector('.mdl-dialog__title').innerHTML = this.getAttribute('data-dialog-title');
-        //dialog.querySelector('.mdl-dialog__content').innerHTML = '<pre>' + statement + '</pre>';
-        //dialog.showModal();
+          passwords = gen.generate(),
+          resultElem = document.getElementById('result');
+        resultElem.innerHTML = '';
+        for (var i = 0, len = passwords.length; i < len; i++) {
+          resultElem.appendChild(
+            Toolkit.Element.create('li', {
+              className: 'password',
+              innerHTML: passwords[i]
+            })
+          );
+        }
+      }, false);
+    });
+    document.querySelectorAll('.draw').forEach(function (elem) {
+      elem.addEventListener('click', function () {
+        var drawnResult = document.getElementById('drawn-result');
+        drawnResult.innerHTML = ' ';
+        var passwords = document.querySelectorAll('#result .password');
+        if (passwords.length > 0) {
+          var index = Toolkit.Math.getRandomInt(0, passwords.length - 1);
+          drawnResult.innerHTML = passwords[index].innerHTML;
+        }
       }, false);
     });
   }
@@ -147,4 +172,4 @@
     //initDialogs();
     setGeneratingHandler();
   }, false);
-})(window);
+})(window, window.document);

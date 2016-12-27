@@ -39,7 +39,7 @@
     //,{privilege: 'ALL [PRIVILEGES]', column: '', context: 'server administration', checked: false},
     // {privilege: 'USAGE', column: '', context: 'server administration', checked: false}
   ];
-  const DEFAULT_CHARSET = 'utf8mb4_general_ci';
+  const DEFAULT_CHARSET = 'utf8mb4_bin';
   const CHARSETS = [
     {category: 'armscii8 (ARMSCII-8 Armenian)', collation: 'armscii8_bin', description: 'Armenian, Binary'},
     {category: 'armscii8 (ARMSCII-8 Armenian)', collation: 'armscii8_general_ci', description: 'Armenian, case-insensitive'},
