@@ -2,11 +2,16 @@
   'use strict';
 
   const LETTER_TYPES = {
-    'signs':'`~!@#$%^&*()_+-=[]\\;\',./{}|:"<>?',
-    'uppercase':'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    'lowercase':'abcdefghijklmnopqrstuvwxyz',
-    'numbers':'0123456789',
-    'space':' '
+    //'signs':'`~!@#$%^&*()_+-=[]\\;\',./{}|:"<>?',
+    //'uppercase':'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    //'lowercase':'abcdefghijklmnopqrstuvwxyz',
+    //'numbers':'0123456789',
+    //'space':' '
+    'signs':{view:'Use signs', value:'`~!@#$%^&*()_+-=[]\\;\',./{}|:"<>?', checked:true},
+    'uppercase':{view:'Use upper alphabets (A-Z)', value:'ABCDEFGHIJKLMNOPQRSTUVWXYZ', checked:true},
+    'lowercase':{view:'Use lower alphabets (a-z)', value:'abcdefghijklmnopqrstuvwxyz', checked:true},
+    'numbers':{view:'Use numbers (0-9)', value:'0123456789', checked:true},
+    'space':{view:'Use space', value:' ', checked:false}
   };
 
   /**
@@ -55,7 +60,7 @@
       var result = '';
       for (var i in this.options) {
         if (this.options[i]) {
-          result += LETTER_TYPES[i];
+          result += LETTER_TYPES[i].value;
         }
       }
       return result;
@@ -106,16 +111,17 @@
     generatePassword: function() {
       var result = '',
         len = this.calcPasswordLength(),
-        charLength = this.availableChars.length;
+        charLength = this.availableChars.length,
+        i = 0;
       if (this.noDuplicateChars && len > charLength) {
         throw new Error(sprintf('Specified length for password is too short (min: %s / max: %s).', this.minLength, this.maxLength));
       }
-      for (var i = 0; i < len; i++) {
+      while (i < len) {
         var tmp = this.availableChars.charAt(parseInt(Math.random() * charLength));
         if (this.noDuplicateChars && result.indexOf(tmp) > -1) {
-          i--;
         } else {
           result += tmp;
+          i++;
         }
       }
       return result;
@@ -142,12 +148,9 @@
           resultElem = document.getElementById('result');
         resultElem.innerHTML = '';
         for (var i = 0, len = passwords.length; i < len; i++) {
-          resultElem.appendChild(
-            Toolkit.Element.create('li', {
-              className: 'password',
-              innerHTML: passwords[i]
-            })
-          );
+          var resultHtml = Toolkit.Element.create('li', {className: 'password'});
+          resultHtml.appendChild(document.createTextNode(passwords[i]));
+          resultElem.appendChild(resultHtml);
         }
       }, false);
     });
