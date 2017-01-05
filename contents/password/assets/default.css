@@ -4,6 +4,15 @@
   width: 120px !important;
 }
 
+.option-sample-chars {
+  background: #eee;
+  border: 1px solid #999;
+  font: 12px Consolas,"Liberation Mono",Menlo,Courier,monospace;
+  margin: 0 3px;
+  padding: 2px 3px;
+  width: 250px;
+}
+
 #result {
   list-style: none;
   margin: 0;

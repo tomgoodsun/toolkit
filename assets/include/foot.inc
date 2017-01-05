@@ -11,6 +11,6 @@
       </div>
     </dialog>
 
-    <script src="<?php echo $root_uri; ?>/assets/js/libraries.js"></script>
+    <script type="text/javascript" src="<?php echo $root_uri; ?>/assets/js/libraries.js"></script>
   </body>
 </html>

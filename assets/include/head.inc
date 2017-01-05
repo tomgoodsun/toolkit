@@ -8,12 +8,12 @@
     <title><?php echo $site_title; ?> | tom-gs.com Tookit</title>
 
     <link rel="stylesheet" href="<?php echo $root_uri; ?>/assets/mdl/material.min.css">
-    <script src="<?php echo $root_uri; ?>/assets/mdl/material.min.js"></script>
+    <script type="text/javascript" src="<?php echo $root_uri; ?>/assets/mdl/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <link rel="stylesheet" href="<?php echo $root_uri; ?>/assets/css/default.css" />
 
-    <script src="<?php echo $root_uri; ?>/assets/scripts/dialog-polyfill/dialog-polyfill.js"></script>
+    <script type="text/javascript" src="<?php echo $root_uri; ?>/assets/scripts/dialog-polyfill/dialog-polyfill.js"></script>
     <link rel="stylesheet" href="<?php echo $root_uri; ?>/assets/scripts/dialog-polyfill/dialog-polyfill.css" />
   </head>
   <body>

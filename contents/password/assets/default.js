@@ -60,7 +60,12 @@
       var result = '';
       for (var i in this.options) {
         if (this.options[i]) {
-          result += LETTER_TYPES[i].value;
+          var elem = document.getElementById('option-sample-chars-' + i);
+          if (elem === null) {
+            result += LETTER_TYPES[i].value;
+          } else {
+            result += elem.value;
+          }
         }
       }
       return result;
@@ -140,6 +145,37 @@
   //  setGeneratingHandler();
   //}
 
+  function initOptions() {
+    var wrappers = document.querySelectorAll('.option-wrapper'),
+      len = wrappers.length;
+    for (var i in LETTER_TYPES) {
+      var options = LETTER_TYPES[i],
+        labelAttrs = {
+          for: 'opt-' + i
+        },
+        inputAttrs = {
+          id: 'opt-' + i,
+          className: 'options',
+          'data-name': i
+        };
+      var elem = Toolkit.Mdl.createCheckbox(options.view, labelAttrs, inputAttrs, options.checked);
+      if (i != 'space') {
+        var input = Toolkit.Element.create('input', {
+          type: 'text',
+          id: 'option-sample-chars-' + i,
+          className: 'option-sample-chars',
+          value: options.value,
+          'data-orig-value': options.value
+        });
+        elem.appendChild(input);
+      }
+
+      for (var j = 0; j < len; j++) {
+        wrappers[j].appendChild(elem);
+      }
+    }
+  }
+
   function setGeneratingHandler() {
     document.querySelectorAll('.generate').forEach(function (elem) {
       elem.addEventListener('click', function () {
@@ -173,6 +209,7 @@
     //createCharsetSelectList();
     //setPrivilegeHandler();
     //initDialogs();
+    initOptions();
     setGeneratingHandler();
   }, false);
 })(window, window.document);
