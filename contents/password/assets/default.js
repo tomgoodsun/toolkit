@@ -147,27 +147,58 @@
 
   function initOptions() {
     var wrappers = document.querySelectorAll('.option-wrapper'),
-      len = wrappers.length;
+      len = wrappers.length,
+      options = [],
+      labelAttrs = [],
+      inputAttrs = [],
+      elem,
+      input,
+      restorer,
+      tooltip;
+
     for (var i in LETTER_TYPES) {
-      var options = LETTER_TYPES[i],
-        labelAttrs = {
-          for: 'opt-' + i
-        },
-        inputAttrs = {
-          id: 'opt-' + i,
-          className: 'options',
-          'data-name': i
-        };
-      var elem = Toolkit.Mdl.createCheckbox(options.view, labelAttrs, inputAttrs, options.checked);
+      options = LETTER_TYPES[i];
+      labelAttrs = {
+        for: 'opt-' + i
+      };
+      inputAttrs = {
+        id: 'opt-' + i,
+        className: 'options',
+        'data-name': i
+      };
+      elem = Toolkit.Mdl.createCheckbox(options.view, labelAttrs, inputAttrs, options.checked);
       if (i != 'space') {
-        var input = Toolkit.Element.create('input', {
+        input = Toolkit.Element.create('input', {
           type: 'text',
           id: 'option-sample-chars-' + i,
           className: 'option-sample-chars',
           value: options.value,
           'data-orig-value': options.value
         });
-        elem.appendChild(input);
+        elem.append(input);
+
+        restorer = Toolkit.Element.create('a', {
+          href: 'javascript: void(0)',
+          id: 'restorer-' + i,
+          className: 'option-sample-chars-restorer material-icons',
+          'data-target-id': 'option-sample-chars-' + i,
+          innerHTML: 'undo',
+          title: 'Restore original data'
+        });
+        restorer.addEventListener('click', function (evt) {
+          var id = evt.target.getAttribute('data-target-id');
+          var elem = document.getElementById(id);
+          elem.value = elem.getAttribute('data-orig-value');
+        }, false);
+        elem.append(restorer);
+
+        //tooltip = Toolkit.Element.create('div', {
+        //  className: 'mdl-tooltip',
+        //  'data-mdl-for': 'restorer-' + i,
+        //  innerHTML: 'Restore original data'
+        //});
+        //elem.append(tooltip);
+        //componentHandler.upgradeElement(tooltip);
       }
 
       for (var j = 0; j < len; j++) {

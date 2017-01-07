@@ -4,6 +4,13 @@
   width: 120px !important;
 }
 
+.option-wrapper .material-icons {
+  display: inline-block;
+  font-size: 12px;
+  position: relative;
+  text-decoration: none;
+}
+
 .option-sample-chars {
   background: #eee;
   border: 1px solid #999;
