@@ -1,0 +1,19 @@
+<?php require ($root_dir . '/assets/include/head.inc'); ?>
+
+<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+  <h3>
+    Enter JSON string
+    <input type="button" class="mdl-button mdl-js-button mdl-button--raised convert" value="Convert" />
+  </h3>
+  <textarea id="json"></textarea>
+</div>
+<div id="privileges" class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet">
+  <h3>Decoded</h3>
+  <textarea id="result" readonly="readonly"></textarea>
+</div>
+
+<script type="text/javascript" src="<?php echo $content_uri; ?>/assets/default.js"></script>
+<link rel="stylesheet" href="<?php echo $content_uri; ?>/assets/default.css" />
+
+<!-- <script src="assets/js/db.js"></script> -->
+<?php require ($root_dir . '/assets/include/foot.inc'); ?>

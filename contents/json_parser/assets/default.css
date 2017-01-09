@@ -1,0 +1,10 @@
+#json,
+#result {
+  font: 12px Consolas,"Liberation Mono",Menlo,Courier,monospace;
+  height: 500px;
+  width: 100%;
+}
+#result {
+  background: #eee;
+}
+

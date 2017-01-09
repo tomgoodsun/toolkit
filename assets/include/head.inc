@@ -40,7 +40,7 @@
           <a class="mdl-navigation__link" href="<?php echo $root_uri; ?>/">Home</a>
           <a class="mdl-navigation__link" href="<?php echo $root_uri; ?>/db">MySQL Initial Query Generator</a>
           <a class="mdl-navigation__link" href="<?php echo $root_uri; ?>/password">Password Generator</a>
-          <a class="mdl-navigation__link" href="<?php echo $root_uri; ?>/">Home</a>
+          <a class="mdl-navigation__link" href="<?php echo $root_uri; ?>/json_parser">JSON Parser</a>
         </nav>
       </div>
       <main class="mdl-layout__content">
