@@ -10,8 +10,8 @@
     'signs':{view:'Use signs', value:'`~!@#$%^&*()_+-=[]\\;\',./{}|:"<>?', checked:true},
     'uppercase':{view:'Use upper alphabets (A-Z)', value:'ABCDEFGHIJKLMNOPQRSTUVWXYZ', checked:true},
     'lowercase':{view:'Use lower alphabets (a-z)', value:'abcdefghijklmnopqrstuvwxyz', checked:true},
-    'numbers':{view:'Use numbers (0-9)', value:'0123456789', checked:true},
-    'space':{view:'Use space', value:' ', checked:false}
+    'numbers':{view:'Use numbers (0-9)', value:'0123456789', checked:true}
+    //,'space':{view:'Use space', value:' ', checked:false}
   };
 
   /**
@@ -175,7 +175,7 @@
           value: options.value,
           'data-orig-value': options.value
         });
-        elem.append(input);
+        elem.appendChild(input);
 
         restorer = Toolkit.Element.create('a', {
           href: 'javascript: void(0)',
@@ -190,14 +190,14 @@
           var elem = document.getElementById(id);
           elem.value = elem.getAttribute('data-orig-value');
         }, false);
-        elem.append(restorer);
+        elem.appendChild(restorer);
 
         //tooltip = Toolkit.Element.create('div', {
         //  className: 'mdl-tooltip',
         //  'data-mdl-for': 'restorer-' + i,
         //  innerHTML: 'Restore original data'
         //});
-        //elem.append(tooltip);
+        //elem.appendChild(tooltip);
         //componentHandler.upgradeElement(tooltip);
       }
 
@@ -227,8 +227,12 @@
         drawnResult.innerHTML = ' ';
         var passwords = document.querySelectorAll('#result .password');
         if (passwords.length > 0) {
+          for (var i = 0; i < passwords.length; i++) {
+            passwords[i].removeClass('is-selected');
+          }
           var index = Toolkit.Math.getRandomInt(0, passwords.length - 1);
           drawnResult.innerHTML = passwords[index].innerHTML;
+          passwords[index].addClass('is-selected');
         }
       }, false);
     });
